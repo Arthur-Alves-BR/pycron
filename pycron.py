@@ -27,7 +27,6 @@ def main() -> None:
         reference_instant = pendulum.now()
         for line in read_config_file():
             if is_comment(line):
-                print(line)
                 continue
             handle_line(line, reference_instant)
         time.sleep(calc_seconds_until_next_run(reference_instant))

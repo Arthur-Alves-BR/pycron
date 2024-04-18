@@ -1,3 +1,3 @@
 # Pycron
 
-This project is a simplified copy of the Linux crontab, but written in python.
+This project is a simplified copy of the Linux Crontab written in python.

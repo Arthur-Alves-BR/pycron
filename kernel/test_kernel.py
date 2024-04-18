@@ -3,7 +3,7 @@ import typing
 import pendulum
 
 from kernel.date_and_time import is_it_time_to_run
-from kernel.pycron_conf import get_schedule_and_command
+from kernel.pycron_conf import get_schedule_and_command, is_comment
 
 
 @pytest.mark.parametrize('test_input,expected_output', [
@@ -38,3 +38,12 @@ def test_is_it_time_to_run(scheduling_parts: typing.List[str], expected_output: 
     reference = pendulum.DateTime(year=2024, month=1, day=1, hour=0, minute=0, second=0)
     pendulum.travel_to(reference, freeze=True)
     assert is_it_time_to_run(reference, scheduling_parts) == expected_output
+
+
+@pytest.mark.parametrize('line,expected_output', [
+    ('* * * * * python3 /path/to/file', False),
+    ('#* * * * * python3 /path/to/file', True),
+    ('# * * * * * python3 /path/to/file', True),
+])
+def test_is_comment(line: str, expected_output: bool) -> None:
+    assert is_comment(line) == expected_output

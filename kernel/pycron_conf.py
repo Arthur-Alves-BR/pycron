@@ -17,3 +17,7 @@ def get_schedule_and_command(pycron_item: str) -> typing.Tuple[typing.List[str],
     schedule = splitted_item[:5]
     command = ' '.join(splitted_item[5:])
     return schedule, command
+
+
+def is_comment(line: str) -> bool:
+    return line.startswith('#')
